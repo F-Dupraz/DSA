@@ -87,11 +87,23 @@ int main() {
 
   std::cout << "la altura del arbol es: " << myBinaryTree->getHeight() << std::endl;
 
+  myBinaryTree->isBalanced() ? std::cout << "balanced" : std::cout << "not balanced";
+  std::cout << std::endl;
+
   myBinaryTree->remove(40);
 
   myBinaryTree->print();
 
   std::cout << "la altura del arbol es: " << myBinaryTree->getHeight() << std::endl;
+
+  bool isB = myBinaryTree->isBalanced();
+  isB ? std::cout << "balanced" : std::cout << "not balanced";
+  std::cout << std::endl;
+
+  if(!isB) myBinaryTree->balance();
+  myBinaryTree->print();
+  if(!isB) myBinaryTree->balance();
+  myBinaryTree->print();
 
   std::cout << std::endl;
 

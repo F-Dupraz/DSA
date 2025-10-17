@@ -54,8 +54,14 @@ protected:
       BNode<T>* tempLeft = node->left;
       BNode<T>* tempRight = node->right;
       delete node;
-      this->insertRec(tempLeft, tempRight);
-      return tempLeft;
+      if(tempLeft != nullptr) {
+        BNode<T>* balancedLeft = this->insertRec(tempLeft, tempRight);
+        return balancedLeft;
+      }
+      else {
+        BNode<T>* balancedRight = this->insertRec(tempRight, tempLeft);
+        return balancedRight;
+      }
     }
 
     if(node->data <= value)
@@ -100,6 +106,72 @@ protected:
     if(node->right == nullptr) return node->data;
 
     else return maximumRec(node->right);
+  }
+
+  bool isBalancedRec(BNode<T>* node) {
+    if(node == nullptr) return true;
+
+    if(this->getHeightRec(node->right) - this->getHeightRec(node->left) <= 1 &&
+       this->getHeightRec(node->right) - this->getHeightRec(node->left) >= -1) {
+        return isBalancedRec(node->right) && isBalancedRec(node->left);
+      }
+
+    return false;
+  }
+
+  void leftRotate(BNode<T>* node, BNode<T>* father) {
+    BNode<T>* nRight = node->right;
+    node->right = nRight->left;
+    nRight->left = node;
+    std::cout << "Cambiando " << node->data << " por " << nRight->data << std::endl;
+    if(father == nullptr) this->root = nRight;
+    else if(father->left == node) father->left = nRight;
+    else father->right = nRight;
+  }
+
+  void rightRotate(BNode<T>* node, BNode<T>* father) {
+    BNode<T>* nLeft = node->left;
+    node->left = nLeft->right;
+    nLeft->right = node;
+    std::cout << "Cambiando " << node->data << " por " << nLeft->data << std::endl;
+    if(father == nullptr) this->root = nLeft;
+    else if(father->left == node) father->left = nLeft;
+    else father->right = nLeft;
+  }
+
+  void balanceRec(BNode<T>* node, BNode<T>* father = nullptr) {
+    if(node == nullptr) return;
+    if(node->left == nullptr && node->right == nullptr) return;
+
+    int hl = 0, hr = 0;
+
+    if(node->left != nullptr) {
+      balanceRec(node->left, node);
+      hl = this->getHeightRec(node->left);
+    }
+    
+    if(node->right != nullptr) {
+      balanceRec(node->right, node);
+      hr = this->getHeightRec(node->right);
+    }
+
+    int dif = hl - hr;
+
+    if(dif < -1) {
+      int rightBalance = getHeightRec(node->right->left) - getHeightRec(node->right->right);
+      if(rightBalance > 0) {
+        rightRotate(node->right, node);
+      }
+      leftRotate(node, father);
+    } else if(dif > 1) {
+      int leftBalance = getHeightRec(node->left->left) - getHeightRec(node->left->right);
+      if(leftBalance < 0) {
+        leftRotate(node->left, node);
+      }
+      rightRotate(node, father);
+    }
+
+    return;
   }
 
   void printRec(BNode<T>* node, int level) {
@@ -169,6 +241,15 @@ public:
 
   T maximum() {
     return maximumRec(this->root);
+  }
+
+  bool isBalanced() {
+    return isBalancedRec(this->root);
+  }
+
+  void balance() {
+    balanceRec(this->root);
+    return;
   }
 
   void print() {
