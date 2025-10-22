@@ -2,6 +2,8 @@
 #include "BinaryTree.h"
 #include "Stack.h"
 #include "Queue.h"
+#include "Sorting.h"
+
 
 int main() {
   std::cout << "///  Stack opertions: " << std::endl;
@@ -102,8 +104,94 @@ int main() {
 
   if(!isB) myBinaryTree->balance();
   myBinaryTree->print();
-  if(!isB) myBinaryTree->balance();
-  myBinaryTree->print();
+
+  std::cout << std::endl;
+
+  std::cout << "///  Sorting opertions: " << std::endl;
+  std::cout << std::endl;
+
+  int arr1[100] = {
+    42, 7, 91, 18, 63, 27, 84, 12, 56, 2,
+    33, 68, 45, 74, 10, 29, 51, 87, 5, 98,
+    36, 23, 71, 59, 49, 81, 25, 15, 39, 94,
+    70, 8, 99, 31, 64, 21, 47, 13, 62, 3,
+    58, 92, 16, 73, 11, 77, 32, 67, 48, 20,
+    80, 9, 26, 53, 66, 40, 14, 93, 22, 54,
+    46, 97, 60, 37, 85, 19, 79, 4, 75, 43,
+    30, 17, 86, 61, 28, 52, 34, 90, 6, 83,
+    65, 1, 76, 24, 88, 55, 50, 41, 95, 38,
+    82, 78, 35, 72, 44, 89, 96, 57, 69, 100
+  };
+
+  int arr2[100] = {
+    42, 7, 91, 18, 63, 27, 84, 12, 56, 2,
+    33, 68, 45, 74, 10, 29, 51, 87, 5, 98,
+    36, 23, 71, 59, 49, 81, 25, 15, 39, 94,
+    70, 8, 99, 31, 64, 21, 47, 13, 62, 3,
+    58, 92, 16, 73, 11, 77, 32, 67, 48, 20,
+    80, 9, 26, 53, 66, 40, 14, 93, 22, 54,
+    46, 97, 60, 37, 85, 19, 79, 4, 75, 43,
+    30, 17, 86, 61, 28, 52, 34, 90, 6, 83,
+    65, 1, 76, 24, 88, 55, 50, 41, 95, 38,
+    82, 78, 35, 72, 44, 89, 96, 57, 69, 100
+  };
+
+  int arr3[100] = {
+    42, 7, 91, 18, 63, 27, 84, 12, 56, 2,
+    33, 68, 45, 74, 10, 29, 51, 87, 5, 98,
+    36, 23, 71, 59, 49, 81, 25, 15, 39, 94,
+    70, 8, 99, 31, 64, 21, 47, 13, 62, 3,
+    58, 92, 16, 73, 11, 77, 32, 67, 48, 20,
+    80, 9, 26, 53, 66, 40, 14, 93, 22, 54,
+    46, 97, 60, 37, 85, 19, 79, 4, 75, 43,
+    30, 17, 86, 61, 28, 52, 34, 90, 6, 83,
+    65, 1, 76, 24, 88, 55, 50, 41, 95, 38,
+    82, 78, 35, 72, 44, 89, 96, 57, 69, 100
+  };
+
+  for(int i = 0; i < 10; ++i){
+    for(int j = 0; j < 10; ++j)
+      std::cout << " " << arr1[(i*10)+j];
+    std::cout << std::endl;
+  }
+
+  std::cout << std::endl;
+  std::cout << " InsertionSort: " << std::endl;
+
+  InsertionSort(arr1, 100);
+
+  for(int i = 0; i < 10; ++i){
+    for(int j = 0; j < 10; ++j)
+      std::cout << " " << arr1[(i*10)+j];
+    std::cout << std::endl;
+  }
+
+  std::cout << std::endl;
+  std::cout << " SelectionSort: " << std::endl;
+
+  SelectionSort(arr2, 100);
+
+  for(int i = 0; i < 10; ++i){
+    for(int j = 0; j < 10; ++j)
+      std::cout << " " << arr2[(i*10)+j];
+    std::cout << std::endl;
+  }
+
+  std::cout << std::endl;
+  std::cout << " BubbleSort: " << std::endl;
+
+  BubbleSort(arr3, 100);
+
+  for(int i = 0; i < 10; ++i){
+    for(int j = 0; j < 10; ++j)
+      std::cout << " " << arr3[(i*10)+j];
+    std::cout << std::endl;
+  }
+
+  int s = 1000;
+  std::cout << std::endl;
+  std::cout << "Looking for " << s << "...";
+  BinarySearchRec(s, arr1, 100) ? std::cout << " found." << std::endl : std::cout << " not found." << std::endl;
 
   std::cout << std::endl;
 
