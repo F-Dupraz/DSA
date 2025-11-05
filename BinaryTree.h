@@ -123,7 +123,7 @@ protected:
     BNode<T>* nRight = node->right;
     node->right = nRight->left;
     nRight->left = node;
-    std::cout << "Cambiando " << node->data << " por " << nRight->data << std::endl;
+    // std::cout << "Cambiando " << node->data << " por " << nRight->data << std::endl;
     if(father == nullptr) this->root = nRight;
     else if(father->left == node) father->left = nRight;
     else father->right = nRight;
@@ -133,7 +133,7 @@ protected:
     BNode<T>* nLeft = node->left;
     node->left = nLeft->right;
     nLeft->right = node;
-    std::cout << "Cambiando " << node->data << " por " << nLeft->data << std::endl;
+    // std::cout << "Cambiando " << node->data << " por " << nLeft->data << std::endl;
     if(father == nullptr) this->root = nLeft;
     else if(father->left == node) father->left = nLeft;
     else father->right = nLeft;

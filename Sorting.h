@@ -1,3 +1,6 @@
+#pragma once
+#include <vector>
+
 template <typename N>
 void InsertionSort(N* arr, int n) {
   for(int i = 1; i < n; ++i) {
@@ -52,7 +55,7 @@ bool LinearSearch(N* arr, N value, int n) {
 }
 
 template <typename N>
-bool BinarySearch(N* arr, N value, int n) {
+bool BinarySearch(const std::vector<N>& arr, N value, size_t n) {
   int min, max, mid, i = 0;
   min = 0;
   max = n-1;
